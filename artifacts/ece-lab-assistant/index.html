@@ -6,7 +6,7 @@
     <title>ECE Lab Assistant | ECE Engineering Toolkit</title>
     <meta
       name="description"
-      content="A simple toolkit foundation for Electronics and Communication Engineering students."
+      content="Essential electronics calculators and interactive tools for Electronics and Communication Engineering students."
     />
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
     <link rel="stylesheet" href="css/style.css" />
@@ -21,8 +21,8 @@
 
         <nav aria-label="Main navigation">
           <ul class="navigation-list">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#tools">Tools</a></li>
+            <li><a class="nav-link is-active" href="#home" aria-current="page">Home</a></li>
+            <li><a class="nav-link" href="#tools">Tools</a></li>
             <li><a href="#about">About</a></li>
           </ul>
         </nav>
@@ -30,51 +30,129 @@
     </header>
 
     <main>
-      <section class="page-section home-section" id="home" aria-labelledby="home-heading">
-        <div class="container">
-          <p class="eyebrow">ECE ENGINEERING TOOLKIT</p>
-          <h1 id="home-heading">ECE Lab Assistant</h1>
-          <p class="intro-text">
-            Your pocket toolkit for Electronics &amp; Communication Engineering.
-          </p>
-          <p class="section-note">
-            A focused place to learn, check, and explore common engineering
-            calculations.
-          </p>
-        </div>
-      </section>
-
-      <section class="page-section" id="tools" aria-labelledby="tools-heading">
-        <div class="container">
-          <p class="eyebrow">COMING NEXT</p>
-          <h2 id="tools-heading">ECE Tools</h2>
-          <p class="section-note">
-            Essential electronics tools will appear here as the project grows.
-          </p>
-          <div class="placeholder-panel">
-            <p>
-              The calculator interfaces will be added one stage at a time.
+      <section class="hero-section" id="home" aria-labelledby="hero-heading">
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">ECE ENGINEERING TOOLKIT</p>
+            <h1 id="hero-heading">Essential ECE Tools, All in One Place</h1>
+            <p class="hero-description">
+              Quickly calculate, convert, and explore essential electronics
+              concepts with a focused collection of engineering tools.
             </p>
+            <a class="primary-button" href="#tools">Explore Tools <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="circuit-grid"></div>
+            <span class="circuit-node node-one"></span>
+            <span class="circuit-node node-two"></span>
+            <span class="circuit-node node-three"></span>
+            <span class="circuit-label label-voltage">V = IR</span>
+            <span class="circuit-label label-signal">SIGNAL / 01</span>
+            <span class="circuit-chip">ECE</span>
           </div>
         </div>
       </section>
 
-      <section class="page-section" id="about" aria-labelledby="about-heading">
+      <section class="page-section tools-section" id="tools" aria-labelledby="tools-heading">
         <div class="container">
-          <p class="eyebrow">ABOUT THE PROJECT</p>
-          <h2 id="about-heading">Built for ECE students</h2>
-          <p class="section-note">
-            ECE Lab Assistant is a learning project that brings useful
-            Electronics &amp; Communication Engineering tools together in one
-            clear, approachable web application.
-          </p>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">THE TOOLKIT</p>
+              <h2 id="tools-heading">ECE Tools</h2>
+            </div>
+            <p class="section-note">
+              Common calculations and digital concepts, organized in one clear
+              workspace.
+            </p>
+          </div>
+
+          <div class="tools-grid">
+            <article class="tool-card">
+              <div class="tool-card-top">
+                <span class="tool-icon" aria-hidden="true">VIR</span>
+                <span class="tool-status">READY SOON</span>
+              </div>
+              <h3>Ohm's Law Calculator</h3>
+              <p>Calculate voltage, current, or resistance using Ohm's Law.</p>
+              <a class="tool-button" href="#tools" data-tool-target="ohms-law" aria-label="Open Ohm's Law Calculator">Open Tool <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="tool-card">
+              <div class="tool-card-top">
+                <span class="tool-icon" aria-hidden="true">Ω</span>
+                <span class="tool-status">READY SOON</span>
+              </div>
+              <h3>Resistor Color Code</h3>
+              <p>Determine resistance and tolerance from 4-band or 5-band codes.</p>
+              <a class="tool-button" href="#tools" data-tool-target="resistor-color-code" aria-label="Open Resistor Color Code Calculator">Open Tool <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="tool-card">
+              <div class="tool-card-top">
+                <span class="tool-icon" aria-hidden="true">01</span>
+                <span class="tool-status">READY SOON</span>
+              </div>
+              <h3>Number System Converter</h3>
+              <p>Convert values between binary, decimal, octal, and hexadecimal.</p>
+              <a class="tool-button" href="#tools" data-tool-target="number-system" aria-label="Open Number System Converter">Open Tool <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="tool-card">
+              <div class="tool-card-top">
+                <span class="tool-icon" aria-hidden="true">AND</span>
+                <span class="tool-status">READY SOON</span>
+              </div>
+              <h3>Logic Gate Simulator</h3>
+              <p>Explore the behavior and truth tables of common logic gates.</p>
+              <a class="tool-button" href="#tools" data-tool-target="logic-gates" aria-label="Open Logic Gate Simulator">Open Tool <span aria-hidden="true">↗</span></a>
+            </article>
+
+            <article class="tool-card">
+              <div class="tool-card-top">
+                <span class="tool-icon" aria-hidden="true">RC</span>
+                <span class="tool-status">READY SOON</span>
+              </div>
+              <h3>RC Circuit Calculator</h3>
+              <p>Calculate the RC time constant and understand capacitor charging.</p>
+              <a class="tool-button" href="#tools" data-tool-target="rc-circuit" aria-label="Open RC Circuit Calculator">Open Tool <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section about-section" id="about" aria-labelledby="about-heading">
+        <div class="container about-layout">
+          <div>
+            <p class="eyebrow">ABOUT THE PROJECT</p>
+            <h2 id="about-heading">A focused toolkit for learning by doing.</h2>
+          </div>
+          <div class="about-copy">
+            <p>
+              ECE Lab Assistant is a lightweight web toolkit designed for
+              Electronics &amp; Communication Engineering students.
+            </p>
+            <p>
+              It brings commonly used electronics and digital concepts into one
+              simple interface, making it easier to practice, check, and
+              understand the fundamentals.
+            </p>
+            <div class="about-callout">
+              <span class="callout-marker" aria-hidden="true">+</span>
+              <span>Built as a student learning project, one tool at a time.</span>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <p>&copy; 2026 ECE Lab Assistant</p>
+      <div class="container footer-content">
+        <div>
+          <p class="footer-brand">ECE Lab Assistant</p>
+          <p class="footer-note">Built as a learning project for Electronics &amp; Communication Engineering.</p>
+        </div>
+        <p class="footer-copyright">&copy; 2026 ECE Lab Assistant</p>
       </div>
     </footer>
 

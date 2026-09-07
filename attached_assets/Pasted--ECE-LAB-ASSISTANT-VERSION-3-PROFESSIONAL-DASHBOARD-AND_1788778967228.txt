@@ -1,0 +1,612 @@
+# ECE LAB ASSISTANT
+
+## VERSION 3 — PROFESSIONAL DASHBOARD AND UI
+
+Version 2 is complete and the basic project foundation is working.
+
+Now begin Version 3.
+
+The goal of this stage is to build the **professional visual interface and dashboard** of ECE Lab Assistant.
+
+IMPORTANT:
+
+Do NOT implement any calculator functionality yet.
+
+Do NOT write calculator formulas or JavaScript calculation logic.
+
+We are focusing only on the UI, layout, navigation, and reusable visual components.
+
+Continue following all rules from Version 1 and Version 2.
+
+---
+
+# 1. MAIN OBJECTIVE
+
+Transform the basic placeholder webpage into a polished dashboard for:
+
+**ECE Lab Assistant**
+
+Tagline:
+
+**Your pocket toolkit for Electronics & Communication Engineering**
+
+The application should look like a small real-world engineering product suitable for:
+
+* Personal use
+* College project demonstration
+* Portfolio
+* GitHub project
+* Placement discussion
+
+It should NOT look like a basic HTML college assignment.
+
+---
+
+# 2. DESIGN STYLE
+
+Use this visual direction:
+
+* Modern
+* Clean
+* Minimal
+* Technical
+* Professional
+* Slightly futuristic
+* Easy to navigate
+* Easy to read
+
+The design should communicate:
+
+**Electronics + Engineering + Technology + Simplicity**
+
+Avoid:
+
+* Excessive gradients
+* Excessive glassmorphism
+* Huge glowing effects
+* Excessive animations
+* Too many colors
+* Clutter
+* Random decorative elements
+* Generic AI-dashboard appearance
+
+Use visual effects only when they improve usability.
+
+---
+
+# 3. COLOR SYSTEM
+
+Create a consistent color system using CSS variables.
+
+Suggested palette:
+
+* Deep navy / dark blue → primary
+* Electric blue → secondary/accent
+* Subtle cyan or green → occasional accent
+* Light neutral → page background
+* White/light neutral → cards
+* Dark neutral → text
+
+Do not use all colors everywhere.
+
+The interface should have a clear visual hierarchy.
+
+Use CSS variables such as:
+
+```css
+:root {
+    --primary-color: ...;
+    --secondary-color: ...;
+    --accent-color: ...;
+    --background-color: ...;
+    --card-color: ...;
+    --text-color: ...;
+    --muted-text-color: ...;
+    --border-color: ...;
+}
+```
+
+Choose sensible actual values.
+
+---
+
+# 4. TYPOGRAPHY
+
+Use a modern sans-serif font.
+
+Create a clear hierarchy for:
+
+* H1
+* H2
+* H3
+* Body text
+* Small text
+* Navigation text
+* Buttons
+
+The main heading should be prominent but NOT excessively large.
+
+Make the text comfortable to read on both desktop and mobile.
+
+---
+
+# 5. HEADER
+
+Build the final header/navigation.
+
+The header should contain:
+
+### Left side
+
+Application name:
+
+**ECE Lab Assistant**
+
+You may include a small simple electronics/engineering-inspired icon if appropriate.
+
+### Right side
+
+Navigation:
+
+* Home
+* Tools
+* About
+
+The navigation should have:
+
+* Clear spacing
+* Hover state
+* Active/current visual state if practical
+* Good contrast
+
+Keep the header simple.
+
+Do not create complicated dropdown menus.
+
+---
+
+# 6. HERO SECTION
+
+Create the main hero section.
+
+Use this heading:
+
+**Essential ECE Tools, All in One Place**
+
+Supporting text should briefly explain that ECE Lab Assistant provides useful calculators and interactive tools for Electronics & Communication Engineering students.
+
+Example direction:
+
+"Quickly calculate, convert, and explore essential electronics concepts with a simple collection of engineering tools."
+
+Do not copy the example wording blindly if you can improve it while keeping the same meaning.
+
+Add a primary button:
+
+**Explore Tools**
+
+The button should scroll to the Tools section.
+
+Optionally add a subtle engineering-themed visual element using HTML/CSS.
+
+Do NOT use an external image unless genuinely necessary.
+
+Keep the hero clean.
+
+---
+
+# 7. HERO VISUAL
+
+If adding a visual element, keep it simple.
+
+Possible visual ideas:
+
+* Circuit-line pattern
+* Small electronic component shapes
+* Subtle grid
+* Simple circuit-board inspired decoration
+* Small mathematical/electronics symbols
+
+The visual should support the engineering theme.
+
+Do NOT create a huge decorative illustration.
+
+Do NOT use external image libraries just for decoration.
+
+---
+
+# 8. TOOLS SECTION
+
+Create the main Tools section.
+
+Heading:
+
+**ECE Tools**
+
+Supporting text should explain that these tools are designed to make common calculations and concepts easier to explore.
+
+Create cards for these six Version 1 tools:
+
+### Card 1
+
+**Ohm's Law Calculator**
+
+Description:
+
+Calculate voltage, current, or resistance using Ohm's Law.
+
+### Card 2
+
+**Resistor Color Code**
+
+Description:
+
+Determine resistor resistance and tolerance from 4-band or 5-band color codes.
+
+### Card 3
+
+**Number System Converter**
+
+Description:
+
+Convert values between binary, decimal, octal, and hexadecimal.
+
+### Card 4
+
+**Logic Gate Simulator**
+
+Description:
+
+Explore the behavior and truth tables of common digital logic gates.
+
+### Card 5
+
+**RC Circuit Calculator**
+
+Description:
+
+Calculate the RC time constant and understand capacitor charging behavior.
+
+IMPORTANT:
+
+There are only FIVE calculator/tool cards.
+
+The dashboard is one of the six Version 1 features but should NOT have its own card.
+
+---
+
+# 9. TOOL CARD DESIGN
+
+Create reusable tool cards.
+
+Each card should contain:
+
+* Icon or simple visual indicator
+* Tool name
+* Short description
+* "Open Tool" button
+
+Cards should have:
+
+* Consistent dimensions
+* Consistent spacing
+* Rounded corners
+* Subtle border/shadow
+* Hover effect
+* Clear button styling
+
+Do not use a different visual style for every card.
+
+The cards should look like one unified component system.
+
+---
+
+# 10. IMPORTANT: TOOL BUTTONS
+
+For now, the "Open Tool" buttons do NOT need calculator functionality.
+
+However, structure them so that later they can open or scroll to the corresponding calculator section.
+
+Do not implement complicated routing.
+
+Use simple IDs/anchors or another simple Vanilla JavaScript solution.
+
+We will connect the actual tools later.
+
+---
+
+# 11. ABOUT SECTION
+
+Create a polished About section.
+
+Explain briefly:
+
+**ECE Lab Assistant** is a lightweight web toolkit designed for Electronics & Communication Engineering students.
+
+Mention that the application brings commonly used electronics and digital concepts into one simple interface.
+
+Keep it concise.
+
+Do not invent:
+
+* Company information
+* Fake statistics
+* Fake users
+* Fake awards
+* Fake testimonials
+* Fake contributors
+
+This is a student-built project.
+
+---
+
+# 12. FOOTER
+
+Create a clean footer.
+
+Include:
+
+**ECE Lab Assistant**
+
+A short line such as:
+
+"Built as a learning project for Electronics & Communication Engineering."
+
+You may include a simple copyright line if appropriate.
+
+Do not add fake social media accounts or fake contact information.
+
+---
+
+# 13. RESPONSIVE DESIGN
+
+The dashboard must be responsive.
+
+### Desktop
+
+Use a multi-column layout where appropriate.
+
+### Tablet
+
+Reduce the number of columns and spacing appropriately.
+
+### Mobile
+
+Tool cards should stack vertically or use a suitable mobile layout.
+
+Navigation should remain usable on small screens.
+
+The hero should resize naturally.
+
+Buttons should remain easy to tap.
+
+Use CSS media queries.
+
+Do not use Bootstrap or Tailwind.
+
+---
+
+# 14. MICRO-INTERACTIONS
+
+Add only subtle interactions:
+
+* Button hover
+* Card hover
+* Navigation hover
+* Input focus styling for future components
+* Smooth scrolling
+
+Do not add:
+
+* Excessive animations
+* Loading screens
+* Particle effects
+* Cursor effects
+* Large animated backgrounds
+
+Performance and usability are more important than visual effects.
+
+---
+
+# 15. ACCESSIBILITY
+
+Make sure:
+
+* Navigation uses meaningful links
+* Buttons have meaningful labels
+* Images, if any, have appropriate alt text
+* Heading hierarchy is logical
+* Text contrast is readable
+* Interactive elements have visible focus states
+
+---
+
+# 16. JAVASCRIPT
+
+Keep JavaScript minimal in this stage.
+
+Only implement functionality required for:
+
+* Smooth navigation if necessary
+* Mobile navigation only if you actually create a mobile menu
+* Basic UI interactions
+
+DO NOT implement:
+
+* Ohm's Law calculations
+* Resistor calculations
+* Number conversion
+* Logic gate calculations
+* RC calculations
+* LocalStorage
+
+Those will be implemented in later stages.
+
+---
+
+# 17. CODE ORGANIZATION
+
+Continue using:
+
+```text
+index.html
+css/style.css
+js/script.js
+```
+
+Do not create unnecessary files.
+
+Keep the CSS organized into sections such as:
+
+```css
+/* GLOBAL STYLES */
+/* HEADER */
+/* HERO */
+/* TOOLS SECTION */
+/* TOOL CARDS */
+/* ABOUT */
+/* FOOTER */
+/* RESPONSIVE DESIGN */
+```
+
+Keep JavaScript organized with comments.
+
+---
+
+# 18. DO NOT BREAK EXISTING FOUNDATION
+
+Before editing:
+
+* Inspect the current `index.html`
+* Inspect `css/style.css`
+* Inspect `js/script.js`
+
+Preserve the working HTML/CSS/JS connections.
+
+Do not rewrite the entire project unnecessarily.
+
+Build on the Version 2 foundation.
+
+---
+
+# 19. TESTING
+
+After implementation, test:
+
+### Navigation
+
+Home → Home section
+
+Tools → Tools section
+
+About → About section
+
+### Hero button
+
+"Explore Tools" → Tools section
+
+### Tool cards
+
+All five cards should appear correctly.
+
+### Responsive layout
+
+Test desktop and mobile-sized screens.
+
+### Visual consistency
+
+Check:
+
+* spacing
+* typography
+* button consistency
+* card consistency
+* alignment
+* contrast
+
+### JavaScript
+
+Make sure there are no unnecessary console errors.
+
+---
+
+# 20. IMPORTANT RESTRICTIONS
+
+For Version 3:
+
+DO:
+
+* Build the professional dashboard
+* Improve HTML structure
+* Build reusable card styles
+* Build navigation
+* Build hero
+* Build Tools section
+* Build About section
+* Build footer
+* Add responsive CSS
+* Add subtle UI interactions
+
+DO NOT:
+
+* Build calculators
+* Add calculation formulas
+* Add calculator JavaScript
+* Add LocalStorage
+* Add backend
+* Add database
+* Add frameworks
+* Install packages
+* Add authentication
+* Add APIs
+* Add extra tools
+* Add fake information
+
+---
+
+# 21. LEARNING EXPLANATION
+
+After implementation, explain briefly:
+
+### HTML concepts
+
+* Semantic sections
+* Navigation
+* IDs and anchor links
+* Buttons vs links
+* Reusable card structure
+
+### CSS concepts
+
+* CSS variables
+* Flexbox
+* CSS Grid
+* spacing
+* responsive design
+* media queries
+* hover states
+
+### JavaScript concepts
+
+Only explain the small amount of JavaScript actually used in this stage.
+
+Do not overwhelm me with concepts that have not been used yet.
+
+---
+
+# 22. FINAL RESPONSE
+
+When finished:
+
+1. Tell me what files were modified.
+2. Summarize what was built.
+3. Explain the important code concepts.
+4. Give me exact Replit testing steps.
+5. Give me a short checklist of what I should verify.
+6. STOP.
+
+Do not automatically begin Version 4.
+
+Wait for my confirmation.
+
+# END OF VERSION 3
