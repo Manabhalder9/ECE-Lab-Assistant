@@ -1,0 +1,215 @@
+/* =========================
+   DESIGN VARIABLES
+========================= */
+
+:root {
+  --primary-color: #102a43;
+  --secondary-color: #1769aa;
+  --accent-color: #16a6a3;
+  --background-color: #f4f7fa;
+  --card-color: #ffffff;
+  --text-color: #172b4d;
+  --muted-text-color: #52606d;
+  --border-color: #d9e2ec;
+  --focus-color: #0b8f8c;
+}
+
+/* =========================
+   BASIC RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  width: min(100% - 2rem, 72rem);
+  margin: 0 auto;
+}
+
+/* =========================
+   HEADER AND NAVIGATION
+========================= */
+
+.site-header {
+  background: var(--card-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 4.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--accent-color);
+  border-radius: 0.4rem;
+  color: var(--accent-color);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.navigation-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation-list a {
+  color: var(--muted-text-color);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navigation-list a:hover {
+  color: var(--secondary-color);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 3px;
+  border-radius: 0.2rem;
+}
+
+/* =========================
+   PAGE SECTIONS
+========================= */
+
+.page-section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.home-section {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.home-section .eyebrow {
+  color: #7de3df;
+}
+
+h1,
+h2 {
+  margin: 0;
+  color: var(--primary-color);
+  line-height: 1.15;
+}
+
+.home-section h1 {
+  max-width: 40rem;
+  color: #ffffff;
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+}
+
+.intro-text {
+  max-width: 38rem;
+  margin: 1.25rem 0 0;
+  color: #d9e2ec;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+}
+
+.section-note {
+  max-width: 42rem;
+  margin: 1rem 0 0;
+  color: var(--muted-text-color);
+}
+
+.home-section .section-note {
+  color: #bcccdc;
+}
+
+.placeholder-panel {
+  max-width: 42rem;
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--accent-color);
+  color: var(--muted-text-color);
+}
+
+.placeholder-panel p {
+  margin: 0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+  padding: 1.5rem 0;
+  background: var(--primary-color);
+  color: #bcccdc;
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 36rem) {
+  .header-content {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .page-section {
+    padding: 3.5rem 0;
+  }
+}

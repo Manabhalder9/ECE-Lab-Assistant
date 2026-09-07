@@ -1,0 +1,1 @@
+- [Vite static entry scripts](vite-static-entry-scripts.md) — browser scripts in root HTML need module loading so Vite includes them in production builds.
