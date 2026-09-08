@@ -71,11 +71,11 @@
             <article class="tool-card">
               <div class="tool-card-top">
                 <span class="tool-icon" aria-hidden="true">VIR</span>
-                <span class="tool-status">READY SOON</span>
+                <span class="tool-status">AVAILABLE</span>
               </div>
               <h3>Ohm's Law Calculator</h3>
               <p>Calculate voltage, current, or resistance using Ohm's Law.</p>
-              <a class="tool-button" href="#tools" data-tool-target="ohms-law" aria-label="Open Ohm's Law Calculator">Open Tool <span aria-hidden="true">↗</span></a>
+              <a class="tool-button" href="#ohms-law" data-tool-target="ohms-law" aria-label="Open Ohm's Law Calculator">Open Tool <span aria-hidden="true">↗</span></a>
             </article>
 
             <article class="tool-card">
@@ -118,6 +118,104 @@
               <a class="tool-button" href="#tools" data-tool-target="rc-circuit" aria-label="Open RC Circuit Calculator">Open Tool <span aria-hidden="true">↗</span></a>
             </article>
           </div>
+
+          <section class="calculator-panel" id="ohms-law" aria-labelledby="ohms-law-heading">
+            <div class="calculator-heading">
+              <div>
+                <p class="eyebrow">OHM'S LAW / V = I × R</p>
+                <h3 id="ohms-law-heading">Find the value you need</h3>
+              </div>
+              <p>
+                Enter any two known values to calculate voltage, current, or
+                resistance.
+              </p>
+            </div>
+
+            <form id="ohms-law-form" class="calculator-form" novalidate>
+              <fieldset class="solve-fieldset">
+                <legend>Calculate</legend>
+                <div class="solve-options">
+                  <label class="solve-option">
+                    <input type="radio" name="solve-for" value="voltage" checked />
+                    <span>Voltage <strong>V</strong></span>
+                  </label>
+                  <label class="solve-option">
+                    <input type="radio" name="solve-for" value="current" />
+                    <span>Current <strong>I</strong></span>
+                  </label>
+                  <label class="solve-option">
+                    <input type="radio" name="solve-for" value="resistance" />
+                    <span>Resistance <strong>R</strong></span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="calculator-inputs">
+                <label class="calculator-input" for="voltage-input">
+                  <span>Voltage <strong>V</strong></span>
+                  <div class="input-with-unit">
+                    <input
+                      id="voltage-input"
+                      name="voltage"
+                      type="text"
+                      inputmode="decimal"
+                      placeholder="e.g. 12"
+                      autocomplete="off"
+                      aria-describedby="voltage-error"
+                    />
+                    <span aria-hidden="true">V</span>
+                  </div>
+                  <span class="input-error" id="voltage-error" role="alert"></span>
+                </label>
+
+                <label class="calculator-input" for="current-input">
+                  <span>Current <strong>I</strong></span>
+                  <div class="input-with-unit">
+                    <input
+                      id="current-input"
+                      name="current"
+                      type="text"
+                      inputmode="decimal"
+                      placeholder="e.g. 0.5"
+                      autocomplete="off"
+                      aria-describedby="current-error"
+                    />
+                    <span aria-hidden="true">A</span>
+                  </div>
+                  <span class="input-error" id="current-error" role="alert"></span>
+                </label>
+
+                <label class="calculator-input" for="resistance-input">
+                  <span>Resistance <strong>R</strong></span>
+                  <div class="input-with-unit">
+                    <input
+                      id="resistance-input"
+                      name="resistance"
+                      type="text"
+                      inputmode="decimal"
+                      placeholder="e.g. 24"
+                      autocomplete="off"
+                      aria-describedby="resistance-error"
+                    />
+                    <span aria-hidden="true">Ω</span>
+                  </div>
+                  <span class="input-error" id="resistance-error" role="alert"></span>
+                </label>
+              </div>
+
+              <div class="calculator-actions">
+                <button class="calculate-button" type="submit">Calculate <span aria-hidden="true">→</span></button>
+                <button class="reset-button" type="reset">Clear values</button>
+              </div>
+              <p class="calculator-message" id="calculator-message" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="calculator-result" id="calculator-result" aria-live="polite">
+              <span class="result-label">Result</span>
+              <strong id="result-value">Enter values to calculate</strong>
+              <span id="result-formula">V = I × R</span>
+            </div>
+          </section>
         </div>
       </section>
 
