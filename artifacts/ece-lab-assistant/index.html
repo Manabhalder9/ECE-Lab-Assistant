@@ -14,23 +14,23 @@
   <body>
     <header class="site-header">
       <div class="container header-content">
-        <a class="brand" href="#home" aria-label="ECE Lab Assistant home">
+        <a class="brand" href="#" id="brand-link" aria-label="ECE Lab Assistant home">
           <span class="brand-mark" aria-hidden="true">∿</span>
           <span>ECE Lab Assistant</span>
         </a>
 
         <nav aria-label="Main navigation">
           <ul class="navigation-list">
-            <li><a class="nav-link is-active" href="#home" aria-current="page">Home</a></li>
-            <li><a class="nav-link" href="#tools">Tools</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a class="nav-link is-active" href="#" data-view="home-view" aria-current="page">Home</a></li>
+            <li><a class="nav-link" href="#" data-view="tools-view">Tools</a></li>
+            <li><a class="nav-link" href="#" data-view="about-view">About</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="hero-section" id="home" aria-labelledby="hero-heading">
+      <section class="hero-section" id="home-view" aria-labelledby="hero-heading">
         <div class="container hero-layout">
           <div class="hero-copy">
             <p class="eyebrow">ECE ENGINEERING TOOLKIT</p>
@@ -39,7 +39,7 @@
               Quickly calculate, convert, and explore essential electronics
               concepts with a focused collection of engineering tools.
             </p>
-            <a class="primary-button" href="#tools">Explore Tools <span aria-hidden="true">→</span></a>
+            <button class="primary-button" type="button" id="hero-tools-btn">Explore Tools <span aria-hidden="true">→</span></button>
           </div>
 
           <div class="hero-visual" aria-hidden="true">
@@ -54,7 +54,7 @@
         </div>
       </section>
 
-      <section class="page-section tools-section" id="tools" aria-labelledby="tools-heading">
+      <section class="page-section tools-section hidden" id="tools-view" aria-labelledby="tools-heading">
         <div class="container">
           <div class="section-heading">
             <div>
@@ -75,27 +75,27 @@
               </div>
               <h3>Ohm's Law Calculator</h3>
               <p>Calculate voltage, current, or resistance using Ohm's Law.</p>
-              <a class="tool-button" href="#ohms-law" data-tool-target="ohms-law" aria-label="Open Ohm's Law Calculator">Open Tool <span aria-hidden="true">↗</span></a>
+              <button class="tool-button open-tool-btn" type="button" data-tool-target="ohms-law-view" aria-label="Open Ohm's Law Calculator">Open Tool <span aria-hidden="true">↗</span></button>
             </article>
 
             <article class="tool-card">
               <div class="tool-card-top">
                 <span class="tool-icon" aria-hidden="true">Ω</span>
-                <span class="tool-status">READY SOON</span>
+                <span class="tool-status">AVAILABLE</span>
               </div>
               <h3>Resistor Color Code</h3>
               <p>Determine resistance and tolerance from 4-band or 5-band codes.</p>
-              <a class="tool-button" href="#tools" data-tool-target="resistor-color-code" aria-label="Open Resistor Color Code Calculator">Open Tool <span aria-hidden="true">↗</span></a>
+              <button class="tool-button open-tool-btn" type="button" data-tool-target="resistor-calculator-view" aria-label="Open Resistor Color Code Calculator">Open Tool <span aria-hidden="true">↗</span></button>
             </article>
 
             <article class="tool-card">
               <div class="tool-card-top">
                 <span class="tool-icon" aria-hidden="true">01</span>
-                <span class="tool-status">READY SOON</span>
+                <span class="tool-status">AVAILABLE</span>
               </div>
               <h3>Number System Converter</h3>
               <p>Convert values between binary, decimal, octal, and hexadecimal.</p>
-              <a class="tool-button" href="#tools" data-tool-target="number-system" aria-label="Open Number System Converter">Open Tool <span aria-hidden="true">↗</span></a>
+              <button class="tool-button open-tool-btn" type="button" data-tool-target="number-system-view" aria-label="Open Number System Converter">Open Tool <span aria-hidden="true">↗</span></button>
             </article>
 
             <article class="tool-card">
@@ -105,7 +105,7 @@
               </div>
               <h3>Logic Gate Simulator</h3>
               <p>Explore the behavior and truth tables of common logic gates.</p>
-              <a class="tool-button" href="#tools" data-tool-target="logic-gates" aria-label="Open Logic Gate Simulator">Open Tool <span aria-hidden="true">↗</span></a>
+              <button class="tool-button" type="button" disabled aria-label="Open Logic Gate Simulator">Open Tool <span aria-hidden="true">↗</span></button>
             </article>
 
             <article class="tool-card">
@@ -115,11 +115,16 @@
               </div>
               <h3>RC Circuit Calculator</h3>
               <p>Calculate the RC time constant and understand capacitor charging.</p>
-              <a class="tool-button" href="#tools" data-tool-target="rc-circuit" aria-label="Open RC Circuit Calculator">Open Tool <span aria-hidden="true">↗</span></a>
+              <button class="tool-button" type="button" disabled aria-label="Open RC Circuit Calculator">Open Tool <span aria-hidden="true">↗</span></button>
             </article>
           </div>
+        </div>
+      </section>
 
-          <section class="calculator-panel" id="ohms-law" aria-labelledby="ohms-law-heading">
+      <section class="page-section hidden" id="ohms-law-view">
+        <div class="container">
+          <button class="back-to-tools-btn" type="button">← Back to Tools</button>
+          <div class="calculator-panel" id="ohms-law" aria-labelledby="ohms-law-heading">
             <div class="calculator-heading">
               <div>
                 <p class="eyebrow">OHM'S LAW / V = I × R</p>
@@ -133,20 +138,13 @@
 
             <form id="ohms-law-form" class="calculator-form" novalidate>
               <fieldset class="solve-fieldset">
-                <legend>Calculate</legend>
+                <label for="solve-for">Calculate:</label>
                 <div class="solve-options">
-                  <label class="solve-option">
-                    <input type="radio" name="solve-for" value="voltage" checked />
-                    <span>Voltage <strong>V</strong></span>
-                  </label>
-                  <label class="solve-option">
-                    <input type="radio" name="solve-for" value="current" />
-                    <span>Current <strong>I</strong></span>
-                  </label>
-                  <label class="solve-option">
-                    <input type="radio" name="solve-for" value="resistance" />
-                    <span>Resistance <strong>R</strong></span>
-                  </label>
+                  <select id="solve-for" name="solve-for" class="solve-select">
+                    <option value="voltage" selected>Voltage (V)</option>
+                    <option value="current">Current (I)</option>
+                    <option value="resistance">Resistance (R)</option>
+                  </select>
                 </div>
               </fieldset>
 
@@ -215,11 +213,189 @@
               <strong id="result-value">Enter values to calculate</strong>
               <span id="result-formula">V = I × R</span>
             </div>
-          </section>
+          </div>
         </div>
       </section>
 
-      <section class="page-section about-section" id="about" aria-labelledby="about-heading">
+      <section class="page-section hidden" id="resistor-calculator-view">
+        <div class="container">
+          <button class="back-to-tools-btn" type="button">← Back to Tools</button>
+          <div class="calculator-panel" id="resistor-calculator" aria-labelledby="resistor-calculator-heading">
+            <div class="calculator-heading">
+              <div>
+                <p class="eyebrow">RESISTOR COLOR CODE</p>
+                <h3 id="resistor-calculator-heading">Calculate resistance and tolerance</h3>
+              </div>
+              <p>Select the color of each resistor band to calculate its resistance value and tolerance.</p>
+            </div>
+
+            <form id="resistor-form" class="calculator-form" novalidate>
+              <fieldset class="solve-fieldset">
+                <label for="resistor-type">Resistor Type:</label>
+                <div class="solve-options" style="max-width: 200px;">
+                  <select id="resistor-type" name="resistor-type" class="solve-select">
+                    <option value="4" selected>4-Band</option>
+                    <option value="5">5-Band</option>
+                  </select>
+                </div>
+              </fieldset>
+
+              <div class="resistor-visual-container" aria-hidden="true">
+                <div class="resistor-wire"></div>
+                <div class="resistor-body">
+                  <div class="resistor-band-visual" id="visual-band-1"></div>
+                  <div class="resistor-band-visual" id="visual-band-2"></div>
+                  <div class="resistor-band-visual" id="visual-band-3"></div>
+                  <div class="resistor-band-visual" id="visual-band-4"></div>
+                  <div class="resistor-band-visual" id="visual-band-5" style="display: none;"></div>
+                </div>
+                <div class="resistor-wire"></div>
+              </div>
+
+              <div class="resistor-band-inputs">
+                <label class="calculator-input" for="band-1">
+                  <span id="label-band-1">Band 1 (1st Digit)</span>
+                  <div class="input-with-unit">
+                    <select id="band-1" name="band-1" class="solve-select">
+                      <option value="">Select Color</option>
+                    </select>
+                  </div>
+                </label>
+
+                <label class="calculator-input" for="band-2">
+                  <span id="label-band-2">Band 2 (2nd Digit)</span>
+                  <div class="input-with-unit">
+                    <select id="band-2" name="band-2" class="solve-select">
+                      <option value="">Select Color</option>
+                    </select>
+                  </div>
+                </label>
+
+                <label class="calculator-input" for="band-3" id="container-band-3">
+                  <span id="label-band-3">Band 3 (Multiplier)</span>
+                  <div class="input-with-unit">
+                    <select id="band-3" name="band-3" class="solve-select">
+                      <option value="">Select Color</option>
+                    </select>
+                  </div>
+                </label>
+
+                <label class="calculator-input" for="band-4" id="container-band-4">
+                  <span id="label-band-4">Band 4 (Tolerance)</span>
+                  <div class="input-with-unit">
+                    <select id="band-4" name="band-4" class="solve-select">
+                      <option value="">Select Color</option>
+                    </select>
+                  </div>
+                </label>
+
+                <label class="calculator-input" for="band-5" id="container-band-5" style="display: none;">
+                  <span id="label-band-5">Band 5 (Tolerance)</span>
+                  <div class="input-with-unit">
+                    <select id="band-5" name="band-5" class="solve-select">
+                      <option value="">Select Color</option>
+                    </select>
+                  </div>
+                </label>
+              </div>
+
+              <span class="input-error" id="resistor-error" role="alert" style="display: block; margin-bottom: 1rem;"></span>
+
+              <div class="calculator-actions">
+                <button class="reset-button" type="button" id="resistor-reset-btn">Reset</button>
+              </div>
+            </form>
+
+            <div class="calculator-result" id="resistor-result" aria-live="polite">
+              <span class="result-label">Result</span>
+              <strong id="resistor-result-value">Select all resistor bands to calculate the value.</strong>
+              <div id="resistor-result-breakdown" style="font-size: 0.85rem; line-height: 1.6; margin-top: 1rem; color: var(--muted-text-color);"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section hidden" id="number-system-view">
+        <div class="container">
+          <button class="back-to-tools-btn" type="button">← Back to Tools</button>
+          <div class="calculator-panel" id="number-system" aria-labelledby="number-system-heading">
+            <div class="calculator-heading">
+              <div>
+                <p class="eyebrow">DIGITAL LOGIC</p>
+                <h3 id="number-system-heading">Number System Converter</h3>
+              </div>
+              <p>Convert values between Binary, Decimal, Octal, and Hexadecimal number systems.</p>
+            </div>
+
+            <form id="number-system-form" class="calculator-form" novalidate>
+              <div class="calculator-inputs" style="grid-template-columns: 1fr 1fr;">
+                <label class="calculator-input" for="number-input">
+                  <span>Number to Convert</span>
+                  <div class="input-with-unit">
+                    <input
+                      id="number-input"
+                      name="number-input"
+                      type="text"
+                      placeholder="e.g. 1010"
+                      autocomplete="off"
+                      aria-describedby="number-error"
+                    />
+                  </div>
+                  <span class="input-error" id="number-error" role="alert"></span>
+                </label>
+
+                <label class="calculator-input" for="source-system">
+                  <span>Convert From</span>
+                  <div class="input-with-unit">
+                    <select id="source-system" name="source-system" class="solve-select">
+                      <option value="binary" selected>Binary (Base 2)</option>
+                      <option value="decimal">Decimal (Base 10)</option>
+                      <option value="octal">Octal (Base 8)</option>
+                      <option value="hexadecimal">Hexadecimal (Base 16)</option>
+                    </select>
+                  </div>
+                </label>
+              </div>
+
+              <div class="calculator-actions">
+                <button class="calculate-button" type="submit">Convert <span aria-hidden="true">→</span></button>
+                <button class="reset-button" type="reset">Reset</button>
+              </div>
+            </form>
+
+            <div class="calculator-result" id="number-result" aria-live="polite" style="display: none; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+              <div class="number-system-result-card">
+                <span class="result-label">Binary</span>
+                <strong class="result-value-large" id="result-binary"></strong>
+              </div>
+              <div class="number-system-result-card">
+                <span class="result-label">Decimal</span>
+                <strong class="result-value-large" id="result-decimal"></strong>
+              </div>
+              <div class="number-system-result-card">
+                <span class="result-label">Octal</span>
+                <strong class="result-value-large" id="result-octal"></strong>
+              </div>
+              <div class="number-system-result-card">
+                <span class="result-label">Hexadecimal</span>
+                <strong class="result-value-large" id="result-hexadecimal"></strong>
+              </div>
+            </div>
+            
+            <div class="number-system-info">
+              <h4>Number System Basics</h4>
+              <ul>
+                <li><strong>Binary:</strong> Base 2 and uses 0 and 1.</li>
+                <li><strong>Decimal:</strong> Base 10 and uses digits 0–9.</li>
+                <li><strong>Octal:</strong> Base 8 and uses digits 0–7.</li>
+                <li><strong>Hexadecimal:</strong> Base 16 and uses 0–9 and A–F.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section about-section hidden" id="about-view" aria-labelledby="about-heading">
         <div class="container about-layout">
           <div>
             <p class="eyebrow">ABOUT THE PROJECT</p>

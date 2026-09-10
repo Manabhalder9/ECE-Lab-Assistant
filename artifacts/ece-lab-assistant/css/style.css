@@ -349,6 +349,28 @@ h3 {
    GENERAL SECTIONS
 ------------------------- */
 
+.hidden {
+  display: none !important;
+}
+
+.back-to-tools-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: color 180ms ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.back-to-tools-btn:hover {
+  color: var(--primary-color);
+}
+
 .page-section {
   padding: 6rem 0;
   border-bottom: 1px solid var(--border-color);
@@ -449,7 +471,7 @@ h3 {
 ------------------------- */
 
 .calculator-panel {
-  margin-top: 2.5rem;
+  margin-top: 0.5rem;
   padding: clamp(1.35rem, 3vw, 2.5rem);
   background: var(--primary-color);
   border: 1px solid var(--primary-color);
@@ -491,7 +513,9 @@ h3 {
   border-bottom: 1px solid var(--border-color);
 }
 
-.solve-fieldset legend {
+.solve-fieldset legend,
+.solve-fieldset label {
+  display: block;
   margin-bottom: 0.75rem;
   color: var(--primary-color);
   font-size: 0.85rem;
@@ -499,9 +523,8 @@ h3 {
 }
 
 .solve-options {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.65rem;
+  display: block;
+  max-width: 300px;
 }
 
 .solve-option {
@@ -524,13 +547,29 @@ h3 {
   color: var(--primary-color);
 }
 
-.solve-option input {
-  accent-color: var(--accent-color);
+.solve-select {
+  width: 100%;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.3rem;
+  background: #ffffff;
+  color: var(--text-color);
+  font: inherit;
+  font-size: 0.86rem;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23829ab1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
 }
 
-.solve-option strong {
-  color: var(--secondary-color);
-  font-family: "Courier New", monospace;
+.solve-select:focus {
+  border-color: var(--focus-color);
+  box-shadow: 0 0 0 3px rgba(11, 143, 140, 0.15);
+  outline: none;
 }
 
 .calculator-inputs {
@@ -596,6 +635,63 @@ h3 {
   color: #b42318;
   font-size: 0.72rem;
   font-weight: 600;
+}
+
+/* ========================================
+   RESISTOR COLOR CODE STYLES
+   ======================================== */
+
+.resistor-visual-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.resistor-wire {
+  height: 4px;
+  width: 40px;
+  background-color: #a0aabf;
+  border-radius: 2px;
+}
+
+.resistor-body {
+  height: 60px;
+  width: 220px;
+  background-color: #e0cca7; /* classic tan resistor color */
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0 15px;
+  box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #c2b08f;
+  position: relative;
+  overflow: hidden;
+}
+
+.resistor-band-visual {
+  height: 100%;
+  width: 16px;
+  background-color: transparent;
+  opacity: 0.85;
+}
+
+.resistor-band-visual.neutral {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Separation for the tolerance band */
+#visual-band-4, #visual-band-5 {
+  margin-left: 15px;
+}
+
+.resistor-band-inputs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 0;
 }
 
 .calculator-actions {
@@ -727,6 +823,65 @@ h3 {
   color: #ffffff;
   font-size: 1rem;
   line-height: 1;
+}
+
+/* -------------------------
+   NUMBER SYSTEM CONVERTER
+------------------------- */
+
+.number-system-result-card {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.number-system-result-card .result-label {
+  color: var(--secondary-color);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.result-value-large {
+  font-family: "Courier New", monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  word-break: break-all;
+}
+
+.number-system-info {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--accent-color);
+}
+
+.number-system-info h4 {
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.number-system-info ul {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding-left: 1.5rem;
+}
+
+.number-system-info li {
+  margin-bottom: 0.4rem;
+}
+
+.number-system-info strong {
+  color: var(--secondary-color);
 }
 
 /* -------------------------
