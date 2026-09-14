@@ -101,21 +101,21 @@
             <article class="tool-card">
               <div class="tool-card-top">
                 <span class="tool-icon" aria-hidden="true">AND</span>
-                <span class="tool-status">READY SOON</span>
+                <span class="tool-status">AVAILABLE</span>
               </div>
               <h3>Logic Gate Simulator</h3>
               <p>Explore the behavior and truth tables of common logic gates.</p>
-              <button class="tool-button" type="button" disabled aria-label="Open Logic Gate Simulator">Open Tool <span aria-hidden="true">↗</span></button>
+              <button class="tool-button open-tool-btn" type="button" data-tool-target="logic-gate-view" aria-label="Open Logic Gate Simulator">Open Tool <span aria-hidden="true">↗</span></button>
             </article>
 
             <article class="tool-card">
               <div class="tool-card-top">
                 <span class="tool-icon" aria-hidden="true">RC</span>
-                <span class="tool-status">READY SOON</span>
+                <span class="tool-status">AVAILABLE</span>
               </div>
               <h3>RC Circuit Calculator</h3>
               <p>Calculate the RC time constant and understand capacitor charging.</p>
-              <button class="tool-button" type="button" disabled aria-label="Open RC Circuit Calculator">Open Tool <span aria-hidden="true">↗</span></button>
+              <button class="tool-button open-tool-btn" type="button" data-tool-target="rc-circuit-view" aria-label="Open RC Circuit Calculator">Open Tool <span aria-hidden="true">↗</span></button>
             </article>
           </div>
         </div>
@@ -389,6 +389,261 @@
                 <li><strong>Decimal:</strong> Base 10 and uses digits 0–9.</li>
                 <li><strong>Octal:</strong> Base 8 and uses digits 0–7.</li>
                 <li><strong>Hexadecimal:</strong> Base 16 and uses 0–9 and A–F.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section hidden" id="logic-gate-view">
+        <div class="container">
+          <button class="back-to-tools-btn" type="button">← Back to Tools</button>
+          <div class="calculator-panel" id="logic-gate" aria-labelledby="logic-gate-heading">
+            <div class="calculator-heading">
+              <div>
+                <p class="eyebrow">DIGITAL LOGIC</p>
+                <h3 id="logic-gate-heading">Logic Gate Simulator</h3>
+              </div>
+              <p>Select a gate and toggle inputs to see the output and truth table.</p>
+            </div>
+
+            <div class="calculator-form">
+              <div class="logic-circuit-board">
+                <div class="circuit-inputs">
+                  <div class="input-node" id="node-a">
+                    <span class="input-label">A</span>
+                    <button type="button" class="pill-toggle" id="logic-input-a" data-value="0">0</button>
+                  </div>
+                  <div class="input-node" id="node-b">
+                    <span class="input-label">B</span>
+                    <button type="button" class="pill-toggle" id="logic-input-b" data-value="0">0</button>
+                  </div>
+                </div>
+
+                <div class="circuit-gate">
+                  <div class="logic-wire logic-wire-a"></div>
+                  <div class="logic-wire logic-wire-b" id="logic-wire-b-element"></div>
+
+                  <div class="gate-svg-wrapper" id="gate-svg-wrapper" data-gate="AND">
+                    <svg viewBox="0 0 100 80" class="gate-svg">
+                      <g class="gate-shape gate-and">
+                         <path d="M 20,10 L 50,10 A 35,35 0 0,1 50,80 L 20,80 Z" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                      </g>
+                      <g class="gate-shape gate-or">
+                         <path d="M 20,10 Q 40,45 20,80 Q 75,80 90,45 Q 75,10 20,10 Z" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                      </g>
+                      <g class="gate-shape gate-not">
+                         <polygon points="25,20 25,70 65,45" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                         <circle cx="71" cy="45" r="5" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                      </g>
+                      <g class="gate-shape gate-nand">
+                         <path d="M 15,10 L 45,10 A 35,35 0 0,1 45,80 L 15,80 Z" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                         <circle cx="86" cy="45" r="5" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                      </g>
+                      <g class="gate-shape gate-nor">
+                         <path d="M 15,10 Q 35,45 15,80 Q 70,80 85,45 Q 70,10 15,10 Z" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                         <circle cx="91" cy="45" r="5" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                      </g>
+                      <g class="gate-shape gate-xor">
+                         <path d="M 30,10 Q 50,45 30,80 Q 75,80 95,45 Q 75,10 30,10 Z" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                         <path d="M 20,10 Q 40,45 20,80" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                      </g>
+                      <g class="gate-shape gate-xnor">
+                         <path d="M 25,10 Q 45,45 25,80 Q 70,80 85,45 Q 70,10 25,10 Z" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                         <path d="M 15,10 Q 35,45 15,80" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                         <circle cx="91" cy="45" r="5" fill="transparent" stroke="currentColor" stroke-width="4"/>
+                      </g>
+                    </svg>
+
+                    <select id="logic-gate-select" name="logic-gate-select" class="embedded-gate-select">
+                      <option value="AND" selected>AND</option>
+                      <option value="OR">OR</option>
+                      <option value="NOT">NOT</option>
+                      <option value="NAND">NAND</option>
+                      <option value="NOR">NOR</option>
+                      <option value="XOR">XOR</option>
+                      <option value="XNOR">XNOR</option>
+                    </select>
+                  </div>
+
+                  <div class="logic-wire logic-wire-out"></div>
+                </div>
+
+                <div class="circuit-output">
+                  <span class="input-label">Y</span>
+                  <div class="pill-badge" id="logic-output">0</div>
+                </div>
+              </div>
+
+              <div class="calculator-actions" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: center;">
+                <button class="reset-button" type="button" id="logic-reset-btn">Reset Circuit</button>
+              </div>
+            </div>
+
+            <div class="calculator-result logic-details-panel">
+              <div class="logic-expression-section">
+                <span class="result-label" style="color: var(--secondary-color);">Boolean Expression</span>
+                <strong id="logic-expression-display" style="display: block; font-size: 1.75rem; margin: 0.5rem 0 1.5rem; color: #000000;">Y = A · B</strong>
+              </div>
+              <div class="logic-truth-table-container">
+                <span class="result-label" style="color: var(--secondary-color);">Truth Table</span>
+                <table class="logic-truth-table" id="logic-truth-table">
+                  <thead>
+                    <tr>
+                      <th>A</th>
+                      <th class="col-b">B</th>
+                      <th>Y</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Generated via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="logic-educational-info">
+              <h4>Logic Gate Basics</h4>
+              <ul>
+                <li>A logic gate is a digital circuit that performs a Boolean operation.</li>
+                <li>Inputs are binary values: <strong>0</strong> or <strong>1</strong>.</li>
+                <li><strong>AND:</strong> Output is 1 only when all inputs are 1.</li>
+                <li><strong>OR:</strong> Output is 1 when at least one input is 1.</li>
+                <li><strong>NOT:</strong> Reverses the input.</li>
+                <li><strong>NAND:</strong> The inverse of AND.</li>
+                <li><strong>NOR:</strong> The inverse of OR.</li>
+                <li><strong>XOR:</strong> Output is 1 when inputs are different.</li>
+                <li><strong>XNOR:</strong> Output is 1 when inputs are the same.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section hidden" id="rc-circuit-view">
+        <div class="container">
+          <button class="back-to-tools-btn" type="button">← Back to Tools</button>
+          <div class="calculator-panel" id="rc-circuit" aria-labelledby="rc-circuit-heading">
+            <div class="calculator-heading">
+              <div>
+                <p class="eyebrow">TIME CONSTANT / τ = R × C</p>
+                <h3 id="rc-circuit-heading">RC Circuit Calculator</h3>
+              </div>
+              <p>Calculate the RC time constant to understand capacitor charging and discharging.</p>
+            </div>
+
+            <form id="rc-circuit-form" class="calculator-form" novalidate>
+              <div class="resistor-visual-container" aria-hidden="true" style="justify-content: center; margin-bottom: 2rem; background: #ffffff; padding: 2rem; border-radius: 0.5rem; border: 1px solid var(--border-color); display: flex;">
+                <div style="font-family: monospace; font-weight: bold; color: var(--primary-color); white-space: pre; line-height: 1.2;">
+      R
+---/\/\/\/---+--- 
+             |
+             C
+             |
+             |
+-------------+
+                </div>
+              </div>
+
+              <div class="calculator-inputs">
+                <label class="calculator-input" for="rc-resistance-input">
+                  <span>Resistance <strong>R</strong></span>
+                  <div class="input-with-unit" style="padding-right: 0;">
+                    <input
+                      id="rc-resistance-input"
+                      name="rc-resistance"
+                      type="text"
+                      inputmode="decimal"
+                      placeholder="e.g. 10"
+                      autocomplete="off"
+                      aria-describedby="rc-resistance-error"
+                    />
+                    <select id="rc-resistance-unit" name="rc-resistance-unit" class="solve-select" style="width: auto; border: none; background: transparent; padding-right: 1.5rem; border-left: 1px solid var(--border-color); border-radius: 0;">
+                      <option value="1" selected>Ω</option>
+                      <option value="1000">kΩ</option>
+                      <option value="1000000">MΩ</option>
+                    </select>
+                  </div>
+                  <span class="input-error" id="rc-resistance-error" role="alert"></span>
+                </label>
+
+                <label class="calculator-input" for="rc-capacitance-input">
+                  <span>Capacitance <strong>C</strong></span>
+                  <div class="input-with-unit" style="padding-right: 0;">
+                    <input
+                      id="rc-capacitance-input"
+                      name="rc-capacitance"
+                      type="text"
+                      inputmode="decimal"
+                      placeholder="e.g. 100"
+                      autocomplete="off"
+                      aria-describedby="rc-capacitance-error"
+                    />
+                    <select id="rc-capacitance-unit" name="rc-capacitance-unit" class="solve-select" style="width: auto; border: none; background: transparent; padding-right: 1.5rem; border-left: 1px solid var(--border-color); border-radius: 0;">
+                      <option value="1">F</option>
+                      <option value="0.001">mF</option>
+                      <option value="0.000001" selected>µF</option>
+                      <option value="0.000000001">nF</option>
+                      <option value="0.000000000001">pF</option>
+                    </select>
+                  </div>
+                  <span class="input-error" id="rc-capacitance-error" role="alert"></span>
+                </label>
+              </div>
+
+              <div class="calculator-actions">
+                <button class="calculate-button" type="submit">Calculate <span aria-hidden="true">→</span></button>
+                <button class="reset-button" type="reset">Reset</button>
+              </div>
+              <p class="calculator-message" id="rc-calculator-message" role="status" aria-live="polite"></p>
+            </form>
+
+            <div class="calculator-result" id="rc-calculator-result" aria-live="polite" style="display: none; align-items: stretch;">
+              <span class="result-label">Time Constant</span>
+              <strong id="rc-result-value" style="font-size: 2rem;">τ = 1 s</strong>
+              <div id="rc-calculation-breakdown" style="font-family: 'Courier New', Courier, monospace; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                <!-- Dynamic content -->
+              </div>
+
+              <div style="margin-top: 2rem;">
+                <span class="result-label" style="display: block; margin-bottom: 0.5rem;">Charging / Discharging Behavior</span>
+                <table class="logic-truth-table" style="margin-top: 0;">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Charging</th>
+                      <th>Discharging</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>0τ</strong></td><td>0%</td><td>100%</td></tr>
+                    <tr><td><strong>1τ</strong></td><td>63.2%</td><td>36.8%</td></tr>
+                    <tr><td><strong>2τ</strong></td><td>86.5%</td><td>13.5%</td></tr>
+                    <tr><td><strong>3τ</strong></td><td>95.0%</td><td>5.0%</td></tr>
+                    <tr><td><strong>4τ</strong></td><td>98.2%</td><td>1.8%</td></tr>
+                    <tr class="is-active"><td><strong>5τ</strong></td><td>99.3%</td><td>0.7%</td></tr>
+                  </tbody>
+                </table>
+                <p style="font-size: 0.85rem; margin-top: 0.75rem; color: var(--muted-text-color);">
+                  After approximately <strong>5τ</strong>, a capacitor is considered practically fully charged or discharged.
+                </p>
+              </div>
+            </div>
+
+            <div class="logic-educational-info">
+              <h4>RC Circuit Formulas</h4>
+              <ul>
+                <li><strong>Time Constant:</strong> τ = R × C</li>
+                <li><strong>Charging Voltage:</strong> V(t) = V₀(1 − e⁻ᵗ/τ)</li>
+                <li><strong>Discharging Voltage:</strong> V(t) = V₀e⁻ᵗ/τ</li>
+              </ul>
+              <h4 style="margin-top: 1.5rem;">Time Constant Interpretation</h4>
+              <ul>
+                <li><strong>1τ</strong> → about 63.2% charged / 36.8% remains</li>
+                <li><strong>2τ</strong> → about 86.5% charged / 13.5% remains</li>
+                <li><strong>3τ</strong> → about 95.0% charged / 5.0% remains</li>
+                <li><strong>4τ</strong> → about 98.2% charged / 1.8% remains</li>
+                <li><strong>5τ</strong> → about 99.3% charged / 0.7% remains</li>
               </ul>
             </div>
           </div>

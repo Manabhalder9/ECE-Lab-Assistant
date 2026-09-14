@@ -8,7 +8,9 @@ const allViews = [
   document.getElementById("about-view"),
   document.getElementById("ohms-law-view"),
   document.getElementById("resistor-calculator-view"),
-  document.getElementById("number-system-view")
+  document.getElementById("number-system-view"),
+  document.getElementById("logic-gate-view"),
+  document.getElementById("rc-circuit-view")
 ];
 
 const navigationLinks = document.querySelectorAll(".nav-link");
@@ -45,7 +47,9 @@ function switchView(targetViewId) {
       targetViewId === "tools-view" || 
       targetViewId === "ohms-law-view" || 
       targetViewId === "resistor-calculator-view" || 
-      targetViewId === "number-system-view"
+      targetViewId === "number-system-view" ||
+      targetViewId === "logic-gate-view" ||
+      targetViewId === "rc-circuit-view"
     )) {
       // If we are on tools view OR any tool calculator view, highlight Tools nav
       isActive = true;
@@ -674,3 +678,337 @@ numberInput.addEventListener("input", () => {
   numberError.textContent = "";
   numberInput.removeAttribute("aria-invalid");
 });
+
+// ========================================
+// LOGIC GATE SIMULATOR
+// ========================================
+
+const logicGateSelect = document.getElementById("logic-gate-select");
+const btnInputA = document.getElementById("logic-input-a");
+const btnInputB = document.getElementById("logic-input-b");
+const outputDisplay = document.getElementById("logic-output");
+const expressionDisplay = document.getElementById("logic-expression-display");
+const truthTableBody = document.querySelector("#logic-truth-table tbody");
+const gateSymbol = document.getElementById("logic-gate-symbol");
+const btnResetLogic = document.getElementById("logic-reset-btn");
+
+const wireA = document.querySelector(".logic-wire-a");
+const wireB = document.querySelector(".logic-wire-b");
+const wireOut = document.querySelector(".logic-wire-out");
+const inputBGroup = document.getElementById("node-b");
+const wireBElement = document.getElementById("logic-wire-b-element");
+const truthTableThB = document.querySelector(".col-b");
+
+const logicGates = {
+  AND: {
+    inputs: 2,
+    expression: "Y = A · B",
+    evaluate: (a, b) => (a === 1 && b === 1 ? 1 : 0),
+  },
+  OR: {
+    inputs: 2,
+    expression: "Y = A + B",
+    evaluate: (a, b) => (a === 1 || b === 1 ? 1 : 0),
+  },
+  NOT: {
+    inputs: 1,
+    expression: "Y = A̅",
+    evaluate: (a) => (a === 1 ? 0 : 1),
+  },
+  NAND: {
+    inputs: 2,
+    expression: "Y = (A · B)̅",
+    evaluate: (a, b) => (a === 1 && b === 1 ? 0 : 1),
+  },
+  NOR: {
+    inputs: 2,
+    expression: "Y = (A + B)̅",
+    evaluate: (a, b) => (a === 1 || b === 1 ? 0 : 1),
+  },
+  XOR: {
+    inputs: 2,
+    expression: "Y = A ⊕ B",
+    evaluate: (a, b) => (a !== b ? 1 : 0),
+  },
+  XNOR: {
+    inputs: 2,
+    expression: "Y = (A ⊕ B)̅",
+    evaluate: (a, b) => (a === b ? 1 : 0),
+  }
+};
+
+let currentGate = "AND";
+let valA = 0;
+let valB = 0;
+
+function updateLogicSimulator() {
+  const gateData = logicGates[currentGate];
+  
+  // Calculate output
+  const output = gateData.inputs === 1 
+    ? gateData.evaluate(valA)
+    : gateData.evaluate(valA, valB);
+    
+  // Update Output UI
+  outputDisplay.textContent = output;
+  if (output === 1) {
+    outputDisplay.classList.add("is-on");
+    wireOut.classList.add("is-active");
+  } else {
+    outputDisplay.classList.remove("is-on");
+    wireOut.classList.remove("is-active");
+  }
+  
+  // Update Expression UI
+  expressionDisplay.textContent = gateData.expression;
+  
+  // Generate Truth Table
+  generateTruthTable(gateData, output);
+}
+
+function generateTruthTable(gateData, currentOutput) {
+  truthTableBody.innerHTML = "";
+  
+  if (gateData.inputs === 1) {
+    // 1-input table (NOT)
+    for (let a = 0; a <= 1; a++) {
+      const y = gateData.evaluate(a);
+      const isCurrentRow = (a === valA);
+      
+      const tr = document.createElement("tr");
+      if (isCurrentRow) tr.classList.add("is-active");
+      
+      tr.innerHTML = `
+        <td>${a}</td>
+        <td class="col-b" style="display:none;">-</td>
+        <td><strong>${y}</strong></td>
+      `;
+      truthTableBody.appendChild(tr);
+    }
+  } else {
+    // 2-input table
+    for (let a = 0; a <= 1; a++) {
+      for (let b = 0; b <= 1; b++) {
+        const y = gateData.evaluate(a, b);
+        const isCurrentRow = (a === valA && b === valB);
+        
+        const tr = document.createElement("tr");
+        if (isCurrentRow) tr.classList.add("is-active");
+        
+        tr.innerHTML = `
+          <td>${a}</td>
+          <td class="col-b">${b}</td>
+          <td><strong>${y}</strong></td>
+        `;
+        truthTableBody.appendChild(tr);
+      }
+    }
+  }
+}
+
+function toggleInput(btn, wire, isA) {
+  const currentVal = parseInt(btn.getAttribute("data-value"), 10);
+  const newVal = currentVal === 1 ? 0 : 1;
+  
+  btn.setAttribute("data-value", newVal);
+  btn.textContent = newVal;
+  
+  if (newVal === 1) {
+    btn.classList.add("is-on");
+    wire.classList.add("is-active");
+  } else {
+    btn.classList.remove("is-on");
+    wire.classList.remove("is-active");
+  }
+  
+  if (isA) valA = newVal;
+  else valB = newVal;
+  
+  updateLogicSimulator();
+}
+
+function switchGate() {
+  currentGate = logicGateSelect.value;
+  const gateData = logicGates[currentGate];
+  
+  document.getElementById("gate-svg-wrapper").setAttribute("data-gate", currentGate);
+  
+  if (gateData.inputs === 1) {
+    // Hide B elements for NOT gate
+    inputBGroup.style.display = "none";
+    wireBElement.style.display = "none";
+    truthTableThB.style.display = "none";
+    wireA.style.top = "50%";
+    wireA.style.transform = "translateY(-50%)";
+  } else {
+    // Show B elements for 2-input gates
+    inputBGroup.style.display = "flex";
+    wireBElement.style.display = "block";
+    truthTableThB.style.display = "table-cell";
+    wireA.style.top = "25%";
+    wireA.style.transform = "none";
+  }
+  
+  updateLogicSimulator();
+}
+
+function resetLogicSimulator() {
+  logicGateSelect.value = "AND";
+  
+  valA = 0;
+  btnInputA.setAttribute("data-value", "0");
+  btnInputA.textContent = "0";
+  btnInputA.classList.remove("is-on");
+  wireA.classList.remove("is-active");
+  
+  valB = 0;
+  btnInputB.setAttribute("data-value", "0");
+  btnInputB.textContent = "0";
+  btnInputB.classList.remove("is-on");
+  wireB.classList.remove("is-active");
+  
+  switchGate();
+}
+
+// Event Listeners
+logicGateSelect.addEventListener("change", switchGate);
+
+btnInputA.addEventListener("click", () => toggleInput(btnInputA, wireA, true));
+btnInputB.addEventListener("click", () => toggleInput(btnInputB, wireB, false));
+
+btnResetLogic.addEventListener("click", resetLogicSimulator);
+
+// Initialize Simulator
+resetLogicSimulator();
+
+// ========================================
+// RC CIRCUIT CALCULATOR
+// ========================================
+
+const rcForm = document.getElementById("rc-circuit-form");
+const rcResistanceInput = document.getElementById("rc-resistance-input");
+const rcResistanceUnit = document.getElementById("rc-resistance-unit");
+const rcResistanceError = document.getElementById("rc-resistance-error");
+const rcCapacitanceInput = document.getElementById("rc-capacitance-input");
+const rcCapacitanceUnit = document.getElementById("rc-capacitance-unit");
+const rcCapacitanceError = document.getElementById("rc-capacitance-error");
+const rcResultContainer = document.getElementById("rc-calculator-result");
+const rcResultValue = document.getElementById("rc-result-value");
+const rcBreakdown = document.getElementById("rc-calculation-breakdown");
+
+function initializeRCCircuitCalculator() {
+  if (!rcForm) return;
+
+  rcForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    calculateRCTimeConstant();
+  });
+
+  rcForm.addEventListener("reset", () => {
+    resetRCCircuitCalculator();
+  });
+}
+
+function resetRCCircuitCalculator() {
+  rcResistanceError.textContent = "";
+  rcResistanceInput.classList.remove("is-invalid");
+  rcCapacitanceError.textContent = "";
+  rcCapacitanceInput.classList.remove("is-invalid");
+  
+  rcResultContainer.style.display = "none";
+}
+
+function showRCError(inputElement, errorElement, message) {
+  inputElement.classList.add("is-invalid");
+  errorElement.textContent = message;
+}
+
+function clearRCErrors() {
+  rcResistanceInput.classList.remove("is-invalid");
+  rcResistanceError.textContent = "";
+  rcCapacitanceInput.classList.remove("is-invalid");
+  rcCapacitanceError.textContent = "";
+}
+
+function formatTimeConstant(seconds) {
+  if (seconds >= 1) {
+    return `${Number(seconds.toPrecision(4))} s`;
+  } else if (seconds >= 0.001) {
+    return `${Number((seconds * 1000).toPrecision(4))} ms`;
+  } else if (seconds >= 0.000001) {
+    return `${Number((seconds * 1000000).toPrecision(4))} µs`;
+  } else {
+    return `${Number((seconds * 1000000000).toPrecision(4))} ns`;
+  }
+}
+
+function getUnitLabel(selectElement) {
+  return selectElement.options[selectElement.selectedIndex].text;
+}
+
+function calculateRCTimeConstant() {
+  clearRCErrors();
+  
+  const rValueStr = rcResistanceInput.value.trim();
+  const cValueStr = rcCapacitanceInput.value.trim();
+  let hasError = false;
+
+  if (!rValueStr || isNaN(rValueStr)) {
+    showRCError(rcResistanceInput, rcResistanceError, "Please enter a valid numeric resistance.");
+    hasError = true;
+  } else if (parseFloat(rValueStr) <= 0) {
+    showRCError(rcResistanceInput, rcResistanceError, "Resistance must be a positive value.");
+    hasError = true;
+  }
+
+  if (!cValueStr || isNaN(cValueStr)) {
+    showRCError(rcCapacitanceInput, rcCapacitanceError, "Please enter a valid numeric capacitance.");
+    hasError = true;
+  } else if (parseFloat(cValueStr) <= 0) {
+    showRCError(rcCapacitanceInput, rcCapacitanceError, "Capacitance must be a positive value.");
+    hasError = true;
+  }
+
+  if (hasError) {
+    rcResultContainer.style.display = "none";
+    return;
+  }
+
+  const rVal = parseFloat(rValueStr);
+  const cVal = parseFloat(cValueStr);
+  
+  const rMult = parseFloat(rcResistanceUnit.value);
+  const cMult = parseFloat(rcCapacitanceUnit.value);
+
+  const rOhms = rVal * rMult;
+  const cFarads = cVal * cMult;
+
+  const tauSeconds = rOhms * cFarads;
+
+  const formattedTau = formatTimeConstant(tauSeconds);
+  
+  const rLabel = getUnitLabel(rcResistanceUnit);
+  const cLabel = getUnitLabel(rcCapacitanceUnit);
+  
+  let rBreakdown = `R = ${rVal} ${rLabel}`;
+  if (rMult !== 1) {
+    rBreakdown += ` = ${rOhms.toLocaleString("en-US", { maximumFractionDigits: 10 })} Ω`;
+  }
+  
+  let cBreakdown = `C = ${cVal} ${cLabel}`;
+  if (cMult !== 1) {
+    cBreakdown += ` = ${cFarads.toLocaleString("en-US", { maximumFractionDigits: 15 })} F`;
+  }
+
+  displayRCResult(formattedTau, rBreakdown, cBreakdown, rOhms, cFarads);
+}
+
+function displayRCResult(formattedTau, rBreakdown, cBreakdown, rOhms, cFarads) {
+  rcResultValue.textContent = `τ = ${formattedTau}`;
+  
+  rcBreakdown.innerHTML = `${rBreakdown}<br>${cBreakdown}<br><br>τ = R × C<br>τ = ${rOhms.toLocaleString("en-US", { maximumFractionDigits: 10 })} × ${cFarads.toLocaleString("en-US", { maximumFractionDigits: 15 })}<br>τ = ${formattedTau}`;
+  
+  rcResultContainer.style.display = "flex";
+}
+
+initializeRCCircuitCalculator();
